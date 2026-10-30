@@ -1,0 +1,24 @@
+<Project>
+
+  <!-- Shared properties for every ShinraShot project. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <Product>ShinraShot</Product>
+    <Company>Shinra CC</Company>
+    <Authors>Shinra CC</Authors>
+    <Copyright>Copyright (C) 2026 Shinra CC</Copyright>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+
+    <!-- Single source of truth for the product version. -->
+    <VersionPrefix>0.2.0</VersionPrefix>
+
+    <!-- Avalonia package version, referenced by every UI project. -->
+    <AvaloniaVersion>12.1.4</AvaloniaVersion>
+  </PropertyGroup>
+
+</Project>

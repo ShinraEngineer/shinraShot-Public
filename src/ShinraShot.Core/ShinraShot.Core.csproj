@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>ShinraShot.Core</RootNamespace>
+    <AssemblyName>ShinraShot.Core</AssemblyName>
+  </PropertyGroup>
+
+</Project>

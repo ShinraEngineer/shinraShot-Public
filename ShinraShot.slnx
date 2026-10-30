@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ShinraShot.App/ShinraShot.App.csproj" />
+    <Project Path="src/ShinraShot.Core/ShinraShot.Core.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,24 @@
+# .NET build outputs
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+artifacts/
+
+# Publish output
+publish/
+*.AppImage
+# (note: do NOT add "*.app" — it would match the ShinraShot.App project directory)
+
+# Installer / package artifacts (generated per build)
+installer/build/
+installer/*.exe
+installer/*.cer
+linux/build/
+linux/dist/
+*.deb
+*.rpm
+
+# OS cruft
+.DS_Store
+Thumbs.db

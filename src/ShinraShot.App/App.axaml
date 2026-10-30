@@ -1,0 +1,40 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ShinraShot.App.App"
+             RequestedThemeVariant="Dark">
+
+  <Application.Resources>
+    <!-- Fluent derives its accent shades from this (ShinraShot red). -->
+    <Color x:Key="SystemAccentColor">#E02B2B</Color>
+    <!-- Base window background: WindowsUpdateBlocker card-bottom blue-gray. -->
+    <SolidColorBrush x:Key="ShinraBg" Color="#222834" />
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+    <!-- All windows wear the dark blue-gray base unless they set their own background. -->
+    <Style Selector="Window">
+      <Setter Property="Background" Value="{StaticResource ShinraBg}" />
+    </Style>
+  </Application.Styles>
+
+  <TrayIcon.Icons>
+    <TrayIcons>
+      <TrayIcon Icon="/Assets/shinrashot.png"
+                ToolTipText="ShinraShot">
+        <TrayIcon.Menu>
+          <NativeMenu>
+            <NativeMenuItem Header="Capture Region" Click="OnCaptureRegion" />
+            <NativeMenuItem Header="Capture Full Screen" Click="OnCaptureFullScreen" />
+            <NativeMenuItemSeparator />
+            <NativeMenuItem Header="Settings…" Click="OnSettings" />
+            <NativeMenuItem Header="Check for Updates…" Click="OnCheckForUpdates" />
+            <NativeMenuItemSeparator />
+            <NativeMenuItem Header="Quit ShinraShot" Click="OnQuit" />
+          </NativeMenu>
+        </TrayIcon.Menu>
+      </TrayIcon>
+    </TrayIcons>
+  </TrayIcon.Icons>
+
+</Application>

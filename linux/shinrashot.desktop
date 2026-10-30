@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=ShinraShot
+GenericName=Screenshot Tool
+Comment=Capture, annotate and share screenshots
+Exec=shinrashot
+TryExec=shinrashot
+Icon=cc.shinra.shinrashot
+Terminal=false
+Categories=Graphics;Utility;2DGraphics;RasterGraphics;
+Keywords=screenshot;capture;snip;annotate;screen;region;
+StartupNotify=true
