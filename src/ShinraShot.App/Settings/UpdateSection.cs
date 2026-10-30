@@ -40,6 +40,8 @@ internal sealed class UpdateSection : StackPanel
     };
 
     private readonly Button _downloadButton;
+    private readonly Image _readyIcon;
+    private readonly StackPanel _downloadRow;
     private readonly ProgressBar _progress = new() { Minimum = 0, Maximum = 1, Height = 6, IsVisible = false, Margin = new Thickness(0, 8, 0, 0) };
     private readonly StackPanel _openRow;
     private readonly Button _openButton;
@@ -66,8 +68,26 @@ internal sealed class UpdateSection : StackPanel
         topRow.Children.Add(_checkButton);
 
         _downloadButton = BuildDownloadButton();
-        _downloadButton.IsVisible = false;
         _downloadButton.Click += (_, _) => _ = RunDownloadAsync();
+
+        // The Shinra "UPD RDY" panel is the update-available indicator: it sits beside the
+        // download action and is shown only once a newer build has been found.
+        _readyIcon = new Image
+        {
+            Width = 48,
+            Height = 48,
+            Source = AppImages.UpdateReady,
+            VerticalAlignment = VerticalAlignment.Center,
+        };
+        _downloadRow = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            Spacing = 12,
+            Margin = new Thickness(0, 8, 0, 0),
+            VerticalAlignment = VerticalAlignment.Center,
+            IsVisible = false,
+            Children = { _readyIcon, _downloadButton },
+        };
 
         _openButton = new Button { Content = "Open installer", Padding = new Thickness(14, 7) };
         _openButton.Classes.Add("accent");
@@ -85,7 +105,7 @@ internal sealed class UpdateSection : StackPanel
 
         Children.Add(topRow);
         Children.Add(_notes);
-        Children.Add(_downloadButton);
+        Children.Add(_downloadRow);
         Children.Add(_progress);
         Children.Add(_openRow);
 
@@ -95,17 +115,14 @@ internal sealed class UpdateSection : StackPanel
             _ = RunCheckAsync();
     }
 
-    private Button BuildDownloadButton()
+    private static Button BuildDownloadButton()
     {
-        var content = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, VerticalAlignment = VerticalAlignment.Center };
-        content.Children.Add(Icons.Download(16, Palette.TextBrush));
-        content.Children.Add(new TextBlock { Text = "Download update", VerticalAlignment = VerticalAlignment.Center });
         var button = new Button
         {
-            Content = content,
+            Content = "Download update",
             Padding = new Thickness(14, 7),
-            Margin = new Thickness(0, 8, 0, 0),
             HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Center,
         };
         button.Classes.Add("accent");
         return button;
@@ -118,7 +135,7 @@ internal sealed class UpdateSection : StackPanel
 
         _checkButton.IsEnabled = false;
         _notes.IsVisible = false;
-        _downloadButton.IsVisible = false;
+        _downloadRow.IsVisible = false;
         _openRow.IsVisible = false;
         _progress.IsVisible = false;
         SetStatus("Checking for updates...", Palette.SecondaryBrush);
@@ -149,7 +166,8 @@ internal sealed class UpdateSection : StackPanel
                 _notes.Text = result.Notes;
                 _notes.IsVisible = true;
             }
-            _downloadButton.IsVisible = true;
+            _downloadButton.IsEnabled = true;
+            _downloadRow.IsVisible = true;
         }
         else
         {
@@ -180,7 +198,7 @@ internal sealed class UpdateSection : StackPanel
 
             _progress.Value = 1;
             _progress.IsVisible = false;
-            _downloadButton.IsVisible = false;
+            _downloadRow.IsVisible = false;
             SetStatus($"Downloaded to {_downloadedPath}", Palette.TextBrush);
             _openRow.IsVisible = true;
         }

@@ -11,6 +11,7 @@ using ShinraShot.App.Imaging;
 using ShinraShot.App.Notifications;
 using ShinraShot.App.Overlay;
 using ShinraShot.App.Settings;
+using ShinraShot.App.Theming;
 using ShinraShot.Core;
 using ShinraShot.Core.Capture;
 using ShinraShot.Core.Input;
@@ -75,7 +76,8 @@ public partial class App : Application
             if (result.UpdateAvailable)
                 ToastService.Show(
                     $"{AppInfo.Name} {result.LatestVersion} is available. Click to update.",
-                    onClick: () => OpenSettings(checkUpdates: true));
+                    onClick: () => OpenSettings(checkUpdates: true),
+                    icon: AppImages.UpdateReady);
         }
         catch
         {

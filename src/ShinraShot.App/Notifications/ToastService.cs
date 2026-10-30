@@ -27,23 +27,25 @@ public static class ToastService
         catch { return null; }
     });
 
-    public static void Show(string message, string? openFolderForPath = null, Action? onClick = null)
+    public static void Show(string message, string? openFolderForPath = null, Action? onClick = null, Bitmap? icon = null)
     {
         if (!Dispatcher.UIThread.CheckAccess())
         {
-            Dispatcher.UIThread.Post(() => Show(message, openFolderForPath, onClick));
+            Dispatcher.UIThread.Post(() => Show(message, openFolderForPath, onClick, icon));
             return;
         }
 
-        try { ShowCore(message, openFolderForPath, onClick); }
+        try { ShowCore(message, openFolderForPath, onClick, icon); }
         catch { /* a toast must never take the app down */ }
     }
 
-    private static void ShowCore(string message, string? openFolderForPath, Action? onClick)
+    private static void ShowCore(string message, string? openFolderForPath, Action? onClick, Bitmap? icon)
     {
         var panel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 10 };
-        if (Logo.Value is { } logo)
-            panel.Children.Add(new Image { Width = 28, Height = 28, Source = logo, VerticalAlignment = VerticalAlignment.Center });
+        // The caller may supply its own art (the "UPD RDY" panel on an update toast); otherwise
+        // fall back to the ShinraShot logo.
+        if ((icon ?? Logo.Value) is { } art)
+            panel.Children.Add(new Image { Width = 28, Height = 28, Source = art, VerticalAlignment = VerticalAlignment.Center });
         panel.Children.Add(new TextBlock
         {
             Text = message,
