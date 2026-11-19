@@ -3,6 +3,10 @@
 
 using System.Security.Cryptography;
 using System.Text.Json;
+// Step 1 of adopting ShinraCC.Update: VersionCompare now comes from the shared package (the local
+// copy is deleted). An alias keeps this surgical — the other local Update/* types still win by name
+// until they migrate too (see the PR description), so there is no ambiguity with the package's.
+using VersionCompare = ShinraCC.Update.VersionCompare;
 
 namespace ShinraShot.Core.Update;
 
