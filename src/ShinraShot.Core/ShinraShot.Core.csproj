@@ -5,4 +5,11 @@
     <AssemblyName>ShinraShot.Core</AssemblyName>
   </PropertyGroup>
 
+  <!-- Suite-wide update library (update.json schema, version compare, feed checker, download+verify).
+       This PR is the first step of adopting it: VersionCompare now comes from the package. The
+       remaining local Update/* types migrate in follow-ups (see the PR description). -->
+  <ItemGroup>
+    <PackageReference Include="ShinraCC.Update" Version="0.1.0" />
+  </ItemGroup>
+
 </Project>
